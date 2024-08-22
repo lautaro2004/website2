@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import styles from "./css/ContactModal.module.css";
 
 const ContactModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -16,16 +17,14 @@ const ContactModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       const response = await axios.post(
-        "https://formspree.io/f/xaykqnvb", // Reemplaza "{your-form-id}" con el ID de tu formulario de Formspree
-        formData,
+        "https://formspree.io/f/xaykqnvb", 
+        formData
       );
 
       console.log("Correo electrónico enviado:", response.data);
-      
-      // Luego puedes cerrar el modal
       onClose();
     } catch (error) {
       console.error("Error al enviar el correo electrónico:", error);
@@ -33,16 +32,12 @@ const ContactModal = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div
-      className={`fixed top-0 bottom-0 left-0 right-0 w-screen h-screen flex items-center justify-center z-50 bg-gray-900 bg-opacity-50 ${
-        isOpen ? "" : "hidden"
-      }`}
-    >
-      <div className="bg-white rounded-lg p-8 max-w-md absolute left-1/2 transform -translate-x-1/2 ">
-        <h2 className="text-2xl font-bold mb-4">Contact Form</h2>
+    <div className={`${styles.modalOverlay} ${isOpen ? "" : styles.hidden}`}>
+      <div className={styles.modalContent}>
+        <h2 className={styles.modalTitle}>Contact Form</h2>
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label htmlFor="name" className="block font-medium mb-1">
+          <div className={styles.formGroup}>
+            <label htmlFor="name" className={styles.label}>
               Name
             </label>
             <input
@@ -51,11 +46,11 @@ const ContactModal = ({ isOpen, onClose }) => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full bg-gray-100 border-gray-300 rounded-md px-4 py-2"
+              className={styles.input}
             />
           </div>
-          <div className="mb-4">
-            <label htmlFor="phoneNumber" className="block font-medium mb-1">
+          <div className={styles.formGroup}>
+            <label htmlFor="phoneNumber" className={styles.label}>
               Phone Number
             </label>
             <input
@@ -64,24 +59,24 @@ const ContactModal = ({ isOpen, onClose }) => {
               name="phoneNumber"
               value={formData.phoneNumber}
               onChange={handleChange}
-              className="w-full bg-gray-100 border-gray-300 rounded-md px-4 py-2"
+              className={styles.input}
             />
           </div>
-          <div className="mb-4">
-            <label htmlFor="email" className="block font-medium mb-1">
+          <div className={styles.formGroup}>
+            <label htmlFor="email" className={styles.label}>
               Email
             </label>
             <input
               type="email"
               id="email"
-              name="_replyto" // Esto es importante para Formspree
+              name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full bg-gray-100 border-gray-300 rounded-md px-4 py-2"
+              className={styles.input}
             />
           </div>
-          <div className="mb-4">
-            <label htmlFor="message" className="block font-medium mb-1">
+          <div className={styles.formGroup}>
+            <label htmlFor="message" className={styles.label}>
               Message
             </label>
             <textarea
@@ -90,21 +85,18 @@ const ContactModal = ({ isOpen, onClose }) => {
               value={formData.message}
               onChange={handleChange}
               rows={4}
-              className="w-full bg-gray-100 border-gray-300 rounded-md px-4 py-2"
+              className={styles.textarea}
             />
           </div>
-          <div className="flex justify-end">
+          <div className={styles.formActions}>
             <button
               type="button"
               onClick={onClose}
-              className="mr-4 bg-red-400 text-white px-6 py-2 rounded-md transition duration-300 hover:bg-red-600"
+              className={styles.cancelButton}
             >
               Cancel
             </button>
-            <button
-              type="submit"
-              className="bg-blue-500 text-white px-6 py-2 rounded-md transition duration-300 hover:bg-blue-600"
-            >
+            <button type="submit" className={styles.submitButton}>
               Submit
             </button>
           </div>
@@ -114,4 +106,4 @@ const ContactModal = ({ isOpen, onClose }) => {
   );
 };
 
-export default ContactModal;
+export default ContactModal
