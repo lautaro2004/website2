@@ -5,11 +5,21 @@ interface Props {
   src: string;
   title: string;
   description: string;
+  href?: string; // Prop opcional para el enlace
 }
 
-const ProjectCard = ({ src, title, description }: Props) => {
+const ProjectCard = ({ src, title, description, href }: Props) => {
   return (
-    <div className="relative overflow-hidden rounded-lg shadow-lg border border-[#2A0E61]">
+    <div
+      className={`relative overflow-hidden rounded-lg shadow-lg border border-[#2A0E61] transition-transform duration-300 ease-in-out ${
+        href ? "cursor-pointer" : ""
+      } hover:scale-110`}
+      onClick={() => {
+        if (href) {
+          window.location.href = href; // Redirige al enlace proporcionado
+        }
+      }}
+    >
       <Image
         src={src}
         alt={title}

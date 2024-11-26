@@ -16,6 +16,7 @@ const Projects = () => {
             src="/shot-alecarp.png"
             title="LandingPage Alecarp"
             description="Reimaginamos la identidad en línea de una carpintería con un nuevo sitio web y un logo renovado, resaltando su artesanía con un toque moderno."
+            href="https://alecarp.com.ar/"
           />
         </div>
       </div>
