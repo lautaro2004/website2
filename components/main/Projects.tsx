@@ -18,6 +18,11 @@ const Projects = () => {
             description="Reimaginamos la identidad en línea de una carpintería con un nuevo sitio web y un logo renovado, resaltando su artesanía con un toque moderno."
           />
         </div>
+      </div>
+      <h1 className="text-[40px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500 py-20">
+        Proyectos en los que participamos
+      </h1>
+      <div className="flex flex-wrap gap-5 px-10 justify-center">
         <div className="w-full sm:w-1/2 lg:w-1/2 flex justify-center">
           <ProjectCard
             src="/shot-sprayette2.png"
